@@ -1,0 +1,93 @@
+<project name="Imagen" default="do-bundle" basedir="..">
+
+  <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" />
+
+  <path id="class.path">
+    <fileset dir="lib">
+      <include name="**/*.jar"/>
+      <include name="**/*.zip"/>
+    </fileset>
+  </path>
+
+  <target name="init">
+    <tstamp/>
+  </target>
+
+  <target name="create-classes-dir" depends="init">
+    <mkdir dir="classes"/>
+  </target>
+
+  <target name="clean">
+    <delete dir="classes"/>
+  </target>
+
+  <target name="compile" depends="clean,create-classes-dir">
+    <javac destdir="classes" source="1.5" >
+      <src path="src"/>
+      <exclude name="**/_*.java"/>
+      <exclude name="**/Test*.java"/>
+      <classpath refid="class.path"/>
+    </javac>
+    <copy todir="classes">
+      <fileset dir="src">
+        <include name="**/*.gif"/>
+        <include name="**/*.jpg"/>
+        <include name="**/*.png"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <!-- JAR -->
+  <target name="create-jar" depends="compile">
+    <jar basedir="classes" jarfile="jar/imagen.jar" manifest="build/imagen.manifest"/>
+    <copy todir="jar">
+      <fileset dir="lib">
+        <include name="**/*.jar"/>
+        <include name="**/*.zip"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <!-- MAC BUNDLE -->
+  <target name="do-bundle" depends="create-jar">
+    <jarbundler dir="release"
+                name="Imagen"
+                shortname="Imagen"
+                signature="Al Alexander"
+                mainclass="com.devdaily.imagen.Imagen" 
+                icon="build/imagen.icns"
+                jvmversion="1.5+"
+                version="0.92"
+                infostring="Imagen, v0.92, June, 2009"
+                build="2190"
+                bundleid="com.devdaily.imagen.Imagen" >
+
+      <!-- this one lets me received drag/drop events from safari to my dock icon -->
+      <documenttype name="Any document type"
+                    ostypes="****" 
+                    role="Viewer"/>
+
+      <!-- i don't think this one does anything right now -->
+      <documenttype name="Hello World images"
+                    mimetypes="image/jpeg image/png image/jpg" 
+                    role="Viewer"/>
+
+      <jarfileset dir="jar">
+        <include name="**/*.jar" />
+        <exclude name="**/CVS" />
+      </jarfileset>
+
+      <javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
+      <javaproperty name="apple.awt.brushMetal" value="true"/>
+      <javaproperty name="apple.awt.showGrowBox" value="true"/>
+      <javaproperty name="com.apple.mrj.application.apple.menu.about.name" value="Imagen"/>
+      <javaproperty name="apple.awt.textantialiasing" value="true"/>
+    </jarbundler>
+  </target>
+
+</project>
+
+
+
+
+

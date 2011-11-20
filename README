@@ -1,0 +1,53 @@
+Imagen Project README File
+
+INTRODUCTION
+------------
+
+This is the README file for the devdaily.com Imagen
+project.
+
+The best way to describe Imagen is to see the demo video:
+
+  http://www.youtube.com/watch?v=8AJxPzpiVjQ
+
+As you can see from that video, Imagen:
+
+  * Lets you drag and drop images.
+  * The images are displayed in borderless windows.
+  * You can resize images.
+  * You can crop images.
+  * You can open multiple images by dropping them on
+    the Imagen icon in the dock.
+  * As you can see in the related video on YouTube,
+    you can also "throw" Imagen windows across the
+    screen.
+
+
+SOURCE CODE
+-----------
+
+The Imagen source code is admittedly pretty crappy. I just through this
+together to see if I could make it work, and to see where it took me. 
+
+I don't have any interest in cleaning up the code right now, but thought 
+I'd share it here in case anyone wanted to see how to do things like 
+this with the Java Swing framework.
+
+
+BULDING IMAGEN
+--------------
+
+If you have Java and Ant installed, you can build Imagen. Just cd 
+to the build directory, and type "ant". Or, take a look at the
+build.xml file in that directory for more information.
+
+
+MORE INFORMATION
+----------------
+
+Imagen was created by Alvin Alexander of http://www.devdaily.com
+
+Please see the devdaily.com website for more information.
+
+
+
